@@ -26,6 +26,13 @@ namespace api_orchestrator.Controllers
 
         }
 
+        [HttpGet("[action]")]
+        public async Task<string> Test()
+        {
+            return new string("Test Succcess");
+        }
+           
+
         [HttpGet("[action]/{customerID}")]
         //public async Task<IActionResult> GetCustomerSales(string customerID)
         public async Task<CustomerSales> GetCustomerSales(string customerID)
