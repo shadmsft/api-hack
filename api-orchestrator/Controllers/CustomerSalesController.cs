@@ -9,7 +9,7 @@ namespace api_orchestrator.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CustomerSalesController : ControllerBase
     {
         private readonly IDownstreamWebApi _productApi;
@@ -30,30 +30,40 @@ namespace api_orchestrator.Controllers
         //public async Task<IActionResult> GetCustomerSales(string customerID)
         public async Task<CustomerSales> GetCustomerSales(string customerID)
         {
-            HttpContext.VerifyUserHasAnyAcceptedScope(_configuration.GetSection("DownstreamCustomerApi:Scopes").Value);
+           HttpContext.VerifyUserHasAnyAcceptedScope(_configuration.GetSection("AzureAd:Scopes").Value);
 
             string customerUrl = _configuration.GetSection("DownstreamCustomerApi:BaseUrl").Value;
 
-            var customerInfo = await _salesApi.CallWebApiForUserAsync<List<Customer>>("DownstreamCustomerApi",
-                options =>
-                {
-                    //options.CustomerID = Convert.ToInt64(Convert.ToString(customerID));
-                    options.RelativePath = $"Customers/GetCustomers/{customerID.ToString()}";
-                });
-            var salesInfo = await _salesApi.CallWebApiForUserAsync<List<SalesOrderHeader>>("DownstreamSalesApi",
-                options =>
-                {
-                    options.RelativePath = $"SalesOrderHeaders/GetSalesOrderHeaders";
-                });
-            return new CustomerSales
+            try
             {
-                //Profile = new Profile() { FirstName = "test", LastName = "test", ProfileId = "3", Address = "184848 S. N. St."},
-                //ProfileProducts = products
-                customers = customerInfo,
-                salesOrderHeaders = salesInfo
-            };
+                var customerInfo = await _customerApi.CallWebApiForUserAsync<List<Customer>>("DownstreamCustomerApi",
+                    options =>
+                    {
+                        options.RelativePath = $"Customers";
+                    });
+                var salesInfo = await _salesApi.CallWebApiForUserAsync<List<SalesOrderHeader>>("DownstreamSalesApi",
+                    options =>
+                    {
+                        options.RelativePath = $"SalesOrderHeaders";
+                    });
+                var productInfo = await _productApi.CallWebApiForUserAsync<List<Product>>("DownstreamProductApi",
+                    options =>
+                    {
+                        options.RelativePath = $"Products";
+                    });
 
+                return new CustomerSales
+                {
+                    customers = customerInfo.ToList(),
+                    salesOrderHeaders = salesInfo.ToList(),
+                    products = productInfo.ToList()                  
+                };
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception(ex.Message);
 
+            }
         }
     }
 }

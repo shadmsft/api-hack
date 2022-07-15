@@ -25,7 +25,7 @@ namespace api_customer.Controllers
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<List<Customer>>> GetCustomers()
         {
 
           if (_context.Customers.Take(10) == null)

@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api_sales.Data;
 using models;
-
+using Microsoft.AspNetCore.Authorization;
 namespace api_sales.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SalesOrderHeadersController : ControllerBase
     {
         private readonly awhackContext _context;

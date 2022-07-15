@@ -1,0 +1,128 @@
+﻿@model models.CustomerSales
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+
+<p>
+   <h1>Customers</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Company Contact</th>
+            <th>Company Email</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.customers) {
+        <tr>
+            <td>
+                @Html.DisplayFor(cust => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.FirstName) @Html.DisplayFor(cust => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.EmailAddress)
+            </td>
+           <!-- 
+               <td>
+                @Html.ActionLink("Edit", "Edit", new { item.CustomerId}) |
+                @Html.ActionLink("Details", "Details", new { item.CustomerId }) |
+                @Html.ActionLink("Delete", "Delete", new { item.CustomerId })
+            </td>
+           -->
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+   <h1>Sales Order Headers</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Sales Order Id</th>
+            <th>Sales Order Number</th>
+            <th>Purchase Order Number</th>
+            <th>Ship Method</th>
+            <th>Total Due</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.salesOrderHeaders) {
+        <tr>
+            <td>
+                @Html.DisplayFor(cust => item.SalesOrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.SalesOrderNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.PurchaseOrderNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.ShipMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.TotalDue)
+            </td>
+             <!-- 
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { item.SalesOrderId}) |
+                @Html.ActionLink("Details", "Details", new { item.SalesOrderId}) |
+                @Html.ActionLink("Delete", "Delete", new { item.SalesOrderId })
+            </td>
+             -->
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+   <h1>Products</h1>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Number</th>
+            <th>Product Name</th>
+            <th>Product List Price</th>
+            <th>Product  Standard Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.products) {
+        <tr>
+            <td>
+                @Html.DisplayFor(cust => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.ProductNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.ListPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(cust => item.StandardCost)
+            </td>
+            <!--
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { item.ProductId}) |
+                @Html.ActionLink("Details", "Details", new { item.ProductId}) |
+                @Html.ActionLink("Delete", "Delete", new { item.ProductId })
+            </td>
+            -->
+        </tr>
+}
+    </tbody>
+</table>

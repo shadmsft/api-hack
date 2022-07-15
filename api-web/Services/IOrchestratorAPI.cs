@@ -56,7 +56,6 @@ namespace api_web.Services
                 //then the user might be prompted to consent again.
                 List<string> scopes = new List<string>(_configuration.GetSection("DownstreamApi:Scopes").Value.Split());
                 var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(scopes);
-                var accessToken = await _tokenAcquisition.getaccess
                 //var accessToken = await _tokenAcquisition.GetAccessTokenForUserAsync(_configuration.GetSection("TodoListScopes").Value.Split().ToList());
                 _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

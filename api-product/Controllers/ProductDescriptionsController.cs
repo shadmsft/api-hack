@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api_product.Data;
 using models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_product.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductDescriptionsController : ControllerBase
     {
         private readonly awhackContext _context;

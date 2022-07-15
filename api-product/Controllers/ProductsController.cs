@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api_product.Data;
 using models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_product.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly awhackContext _context;
@@ -25,11 +27,11 @@ namespace api_product.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-          if (_context.Products == null)
+          if (_context.Products.Take(10) == null)
           {
               return NotFound();
           }
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Take(10).ToListAsync();
         }
 
         // GET: api/Products/5
