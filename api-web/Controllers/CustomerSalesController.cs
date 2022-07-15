@@ -12,6 +12,12 @@ namespace api_web.Controllers
         {
             _orchestratorAPI = orchestratorAPI; 
         }
+
+        public async Task<IActionResult> Test()
+        {
+            string testValue = await _orchestratorAPI.Test();
+            return View();
+        }
         //public IActionResult Index()
         public async Task<IActionResult> Index()
         {
