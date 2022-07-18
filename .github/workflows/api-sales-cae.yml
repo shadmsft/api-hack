@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp api-sales-cae
+name: api-sales-cae
 on:
   push:
     branches:

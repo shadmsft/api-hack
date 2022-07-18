@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp api-product-cae
+name: api-product-cae
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ env:
   AZURE_WEBAPP_NAME: api-product-cae
   AZURE_WEBAPP_PACKAGE_PATH: api-product/publish
   AZURE_WEBAPP_PUBLISH_PROFILE: ${{ secrets.api_product_cae_f228 }}
-  CONFIGURATION: Release
+  CONFIGURATION: Debug
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: api-product
 jobs:
