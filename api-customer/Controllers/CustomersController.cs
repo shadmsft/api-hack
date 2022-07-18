@@ -28,6 +28,7 @@ namespace api_customer.Controllers
         public async Task<ActionResult<List<Customer>>> GetCustomers()
         {
 
+
           if (_context.Customers.Take(10) == null)
           {
               return NotFound();

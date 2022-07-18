@@ -1,5 +1,6 @@
 name: api-customer-cae
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
