@@ -1,4 +1,4 @@
-﻿@using Microsoft.Identity.Web;
+﻿@model api_web.Models.AuthInfo;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,20 +6,31 @@
 <div class="text-center">
     <h1 class="display-4">User Claims</h1>
 </div>
+<style>
+    table,
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
 
 @if (User.Identity.IsAuthenticated)
 {
-<h3>Claims</h3>
-<table>
+<h1>Claims</h1>
+<table border="1">
     <tr>
         <th>Claim Type</th>
         <th>Claim Value</th>
     </tr>
-<pre>
       @foreach(var claim in User.Claims)
       {
             <tr><td>@claim.Type</td><td>@claim.Value</td></tr>
       }
-</pre>
 </table>
+<br/>
+<h1>Access Token</h1>
+<textarea cols="180" rows="20">@Model.accessToken</textarea>
+
 }
