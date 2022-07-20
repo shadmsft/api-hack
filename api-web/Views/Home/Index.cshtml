@@ -1,25 +1,10 @@
 @using Microsoft.Identity.Web;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "CAE Hack Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>A minimal Web App to look at Access Tokens, Claims, and Make a call to the Orchestrator API</p>
+    <p>As you test your APIs you will have to sign-out and sign-in mutliple times to make sure you have a valid token.</p>
 </div>
-@if (User.Identity.IsAuthenticated)
-{
-<h3>Claims</h3>
-<pre>
-      //  @foreach(var claim in User.Claims)
-        {
-           // @(claim.Type + ":" + claim.Value)<br/>
-        }
-    </pre>
-}
-
-<div>API result</div>
-<div>@ViewData["ApiResult"]</div>
-
-<div>Graph API result</div>
-<div>@ViewData["GraphApiResult"]</div>

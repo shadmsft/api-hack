@@ -24,13 +24,22 @@ namespace api_sales.Controllers
 
         // GET: api/SalesOrderHeaders
         [HttpGet]
+        [Authorize(Roles = "api-sales.ReadOnlyRole")]
         public async Task<ActionResult<IEnumerable<SalesOrderHeader>>> GetSalesOrderHeaders()
         {
-          if (_context.SalesOrderHeaders.Take(10) == null)
-          {
-              return NotFound();
-          }
-            return await _context.SalesOrderHeaders.Take(10).ToListAsync();
+            try
+            {
+                if (_context.SalesOrderHeaders.Take(10) == null)
+                {
+                    return NotFound();
+                }
+                return await _context.SalesOrderHeaders.Take(10).ToListAsync();
+            }
+            catch(System.Exception ex)
+            {
+                throw new Exception("Sales Order Header Error: " + ex.Message, ex);
+            }
+          
         }
 
         // GET: api/SalesOrderHeaders/5

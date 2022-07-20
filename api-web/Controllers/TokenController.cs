@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using api_web.Models;
 using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_web.Controllers
 {
+    [Authorize]
     public class TokenController : Controller
     {
         private readonly ITokenAcquisition _tokenAcquisition;

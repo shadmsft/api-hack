@@ -33,9 +33,9 @@ namespace api_orchestrator.Controllers
         }
            
 
-        [HttpGet("[action]/{customerID}")]
-        //public async Task<IActionResult> GetCustomerSales(string customerID)
-        public async Task<CustomerSales> GetCustomerSales(string customerID)
+        [HttpGet("[action]")]
+        [Authorize(Roles = "api-orchestrator.ReadOnlyRole")]
+        public async Task<CustomerSales> GetCustomerSales()
         {
            HttpContext.VerifyUserHasAnyAcceptedScope(_configuration.GetSection("AzureAd:Scopes").Value);
 

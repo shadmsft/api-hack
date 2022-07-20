@@ -25,6 +25,7 @@ namespace api_product.Controllers
 
         // GET: api/Products
         [HttpGet]
+        [Authorize(Roles = "api-product.ReadOnlyRole")]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
           if (_context.Products.Take(10) == null)

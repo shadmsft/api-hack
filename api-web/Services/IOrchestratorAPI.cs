@@ -16,7 +16,7 @@ namespace api_web.Services
     public interface IOrchestratorAPI
     {
         public Task<string> Test();
-        public Task<CustomerSales> GetCustomerSalesAsync(int customerID);
+        public Task<CustomerSales> GetCustomerSalesAsync();
     }
 
     public class OrchestratorAPI : IOrchestratorAPI
@@ -46,10 +46,10 @@ namespace api_web.Services
             }
             throw new HttpRequestException($"Invalid status code in the HttpResponseMessage: {response.StatusCode}.");
         }
-        public async Task<CustomerSales> GetCustomerSalesAsync(int customerID)
+        public async Task<CustomerSales> GetCustomerSalesAsync()
         {
             PrepareAuthenticatedClient().Wait();
-            string apiUrl = $"{_configuration.GetSection("DownstreamApi:BaseUrl").Value}/CustomerSales/GetCustomerSales/{customerID}";
+            string apiUrl = $"{_configuration.GetSection("DownstreamApi:BaseUrl").Value}/CustomerSales/GetCustomerSales";
             var response = await _httpClient.GetAsync(apiUrl);
 
             if(response.StatusCode == System.Net.HttpStatusCode.OK)

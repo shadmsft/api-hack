@@ -25,6 +25,7 @@ namespace api_customer.Controllers
 
         // GET: api/Customers
         [HttpGet]
+        [Authorize(Roles = "api-customer.ReadOnlyRole")]
         public async Task<ActionResult<List<Customer>>> GetCustomers()
         {
 

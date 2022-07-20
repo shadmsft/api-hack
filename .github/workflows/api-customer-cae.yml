@@ -1,9 +1,6 @@
 name: api-customer-cae
 on:
   workflow_dispatch:
-  push:
-    branches:
-    - master
 env:
   AZURE_WEBAPP_NAME: api-customer-cae
   AZURE_WEBAPP_PACKAGE_PATH: api-customer/publish

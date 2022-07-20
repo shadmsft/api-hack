@@ -1,8 +1,6 @@
 name: api-web-cae
 on:
-  push:
-    branches:
-    - master
+  workflow_dispatch:
 env:
   AZURE_WEBAPP_NAME: api-web-cae
   AZURE_WEBAPP_PACKAGE_PATH: api-web/publish

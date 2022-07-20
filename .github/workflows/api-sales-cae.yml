@@ -1,8 +1,6 @@
 name: api-sales-cae
 on:
-  push:
-    branches:
-    - master
+  workflow_dispatch:
 env:
   AZURE_WEBAPP_NAME: api-sales-cae
   AZURE_WEBAPP_PACKAGE_PATH: api-sales/publish
