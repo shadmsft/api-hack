@@ -5,6 +5,9 @@ AdventureWorks has recently migrated some of their core APIs to the Azure App Se
 This is where YOU come in. We need you to help them on their modernization journey for the core APIs. 
 
 ## Architecture 
+
+### AAD Tenant: mscae.microsoft.com
+
 ![image](assets/api-hack.drawio.png)
 
 ## Challenges
