@@ -13,7 +13,7 @@ This is where YOU come in. We need you to help them on their modernization journ
 ## Challenges
 There are plenty of opportunities to help them modernize the APIs. Here are some of the challenges for you to accomplish in this hack. Pick as many as you like to try to accomplish. This list is not exhuastive, so if you see other opportunities to modernize in other areas, feel free to do so.
 
-1. Containerize the app
+1. Containerize the app 
 1. Replace the Orchestrator API with APIM
 1. Add App Gateway
 1. Enable Multi-Tenant Auth
