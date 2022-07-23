@@ -18,25 +18,32 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.customers) {
-        <tr>
-            <td>
-                @Html.DisplayFor(cust => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.FirstName) @Html.DisplayFor(cust => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.EmailAddress)
-            </td>
-           <!-- 
-               <td>
-                @Html.ActionLink("Edit", "Edit", new { item.CustomerId}) |
-                @Html.ActionLink("Details", "Details", new { item.CustomerId }) |
-                @Html.ActionLink("Delete", "Delete", new { item.CustomerId })
-            </td>
-           -->
-        </tr>
+@if(Model.CustomerAccessDenied) {
+
+    <tr>
+        <td colspan="3">Customer Data Access Denied</td>
+    </tr>
+}else {
+    @foreach (var item in Model.customers) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(cust => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.FirstName) @Html.DisplayFor(cust => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.EmailAddress)
+                </td>
+               <!-- 
+                   <td>
+                    @Html.ActionLink("Edit", "Edit", new { item.CustomerId}) |
+                    @Html.ActionLink("Details", "Details", new { item.CustomerId }) |
+                    @Html.ActionLink("Delete", "Delete", new { item.CustomerId })
+                </td>
+               -->
+            </tr>
+    }
 }
     </tbody>
 </table>
@@ -55,31 +62,38 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.salesOrderHeaders) {
-        <tr>
-            <td>
-                @Html.DisplayFor(cust => item.SalesOrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.SalesOrderNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.PurchaseOrderNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.ShipMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.TotalDue)
-            </td>
-             <!-- 
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { item.SalesOrderId}) |
-                @Html.ActionLink("Details", "Details", new { item.SalesOrderId}) |
-                @Html.ActionLink("Delete", "Delete", new { item.SalesOrderId })
-            </td>
-             -->
-        </tr>
+@if(Model.SalesOrderHeaderDenied) {
+
+    <tr>
+        <td colspan="3">Sales Order Header Data Access Denied</td>
+    </tr>
+}else {
+    @foreach (var item in Model.salesOrderHeaders) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(cust => item.SalesOrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.SalesOrderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.PurchaseOrderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.ShipMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.TotalDue)
+                </td>
+                 <!-- 
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { item.SalesOrderId}) |
+                    @Html.ActionLink("Details", "Details", new { item.SalesOrderId}) |
+                    @Html.ActionLink("Delete", "Delete", new { item.SalesOrderId })
+                </td>
+                 -->
+            </tr>
+    }
 }
     </tbody>
 </table>
@@ -98,31 +112,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.products) {
-        <tr>
-            <td>
-                @Html.DisplayFor(cust => item.ProductId)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.ProductNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.ListPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(cust => item.StandardCost)
-            </td>
-            <!--
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { item.ProductId}) |
-                @Html.ActionLink("Details", "Details", new { item.ProductId}) |
-                @Html.ActionLink("Delete", "Delete", new { item.ProductId })
-            </td>
-            -->
-        </tr>
+@if(Model.ProductDenied) {
+    <tr>
+        <td colspan="3">Product Data Access Denied</td>
+    </tr>
+}else {
+    @foreach (var item in Model.products) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(cust => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.ProductNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.ListPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(cust => item.StandardCost)
+                </td>
+                <!--
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { item.ProductId}) |
+                    @Html.ActionLink("Details", "Details", new { item.ProductId}) |
+                    @Html.ActionLink("Delete", "Delete", new { item.ProductId })
+                </td>
+                -->
+            </tr>
+    }
 }
     </tbody>
 </table>

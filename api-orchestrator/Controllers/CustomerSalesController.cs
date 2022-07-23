@@ -38,33 +38,56 @@ namespace api_orchestrator.Controllers
         public async Task<CustomerSales> GetCustomerSales()
         {
            HttpContext.VerifyUserHasAnyAcceptedScope(_configuration.GetSection("AzureAd:Scopes").Value);
-
-            string customerUrl = _configuration.GetSection("DownstreamCustomerApi:BaseUrl").Value;
+            List<Customer> customers = new List<Customer>();
+            List<Product> products = new List<Product>();
+            List<SalesOrderHeader> sales = new List<SalesOrderHeader>();
+            CustomerSales customerProductSales = new CustomerSales();
+            
 
             try
             {
-                var customerInfo = await _customerApi.CallWebApiForUserAsync<List<Customer>>("DownstreamCustomerApi",
-                    options =>
-                    {
-                        options.RelativePath = $"Customers";
-                    });
-                var salesInfo = await _salesApi.CallWebApiForUserAsync<List<SalesOrderHeader>>("DownstreamSalesApi",
-                    options =>
-                    {
-                        options.RelativePath = $"SalesOrderHeaders";
-                    });
-                var productInfo = await _productApi.CallWebApiForUserAsync<List<Product>>("DownstreamProductApi",
-                    options =>
-                    {
-                        options.RelativePath = $"Products";
-                    });
-
-                return new CustomerSales
+                try { 
+                    var customerInfo = await _customerApi.CallWebApiForUserAsync<List<Customer>>("DownstreamCustomerApi",
+                        options =>
+                        {
+                            options.RelativePath = $"Customers";
+                        });
+                    customers = customerInfo.ToList();
+                }
+                catch(System.Exception ex)
                 {
-                    customers = customerInfo.ToList(),
-                    salesOrderHeaders = salesInfo.ToList(),
-                    products = productInfo.ToList()                  
-                };
+                    customerProductSales.CustomerAccessDenied = true;
+                }
+                try { 
+                    var salesInfo = await _salesApi.CallWebApiForUserAsync<List<SalesOrderHeader>>("DownstreamSalesApi",
+                        options =>
+                        {
+                            options.RelativePath = $"SalesOrderHeaders";
+                        });
+                    sales = salesInfo.ToList();
+                }
+                catch(System.Exception ex)
+                {
+                    customerProductSales.SalesOrderHeaderDenied = true;
+                }
+                try
+                {
+                    var productInfo = await _productApi.CallWebApiForUserAsync<List<Product>>("DownstreamProductApi",
+                        options =>
+                        {
+                            options.RelativePath = $"Products";
+                        });
+                    products = productInfo.ToList();
+                }
+                catch (System.Exception ex)
+                {
+                    customerProductSales.ProductDenied = true;
+                }
+                customerProductSales.customers = customers;
+                customerProductSales.salesOrderHeaders = sales;
+                customerProductSales.products = products;
+                return customerProductSales;
+
             }
             catch (System.Exception ex)
             {
