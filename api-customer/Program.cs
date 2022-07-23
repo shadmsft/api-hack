@@ -5,14 +5,13 @@ using Microsoft.Identity.Web;
 using api_customer.Data;
 using Microsoft.IdentityModel.Logging;
 using Azure.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
-
-IdentityModelEventSource.ShowPII = true;
 
 builder.Services.AddDbContext<awhackContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("AdventureWorks")));

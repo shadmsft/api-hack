@@ -56,7 +56,15 @@ namespace api_orchestrator.Controllers
                 }
                 catch(System.Exception ex)
                 {
-                    customerProductSales.CustomerAccessDenied = true;
+                    if (ex.Message == "403 Forbidden ")
+                    {
+                        customerProductSales.CustomerAccessDenied = true;
+                    }
+                    else
+                    {
+                        throw new Exception(ex.Message);
+                    }
+
                 }
                 try { 
                     var salesInfo = await _salesApi.CallWebApiForUserAsync<List<SalesOrderHeader>>("DownstreamSalesApi",
@@ -68,7 +76,14 @@ namespace api_orchestrator.Controllers
                 }
                 catch(System.Exception ex)
                 {
-                    customerProductSales.SalesOrderHeaderDenied = true;
+                    if (ex.Message == "403 Forbidden ")
+                    {
+                        customerProductSales.SalesOrderHeaderDenied = true;
+                    }
+                    else
+                    {
+                        throw new Exception(ex.Message);
+                    }
                 }
                 try
                 {
@@ -81,7 +96,15 @@ namespace api_orchestrator.Controllers
                 }
                 catch (System.Exception ex)
                 {
-                    customerProductSales.ProductDenied = true;
+                    if(ex.Message == "403 Forbidden ")
+                    {
+                        customerProductSales.ProductDenied = true;
+                    }
+                    else
+                    {
+                        throw new Exception(ex.Message);
+                    }   
+                    
                 }
                 customerProductSales.customers = customers;
                 customerProductSales.salesOrderHeaders = sales;
