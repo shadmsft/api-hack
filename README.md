@@ -24,3 +24,4 @@ There are plenty of opportunities to help them modernize the APIs. Here are some
 1. Add Key Vault
 1. Add Application Insights
 1. Add App Config
+2. Add Slots
