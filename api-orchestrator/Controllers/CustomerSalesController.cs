@@ -46,17 +46,19 @@ namespace api_orchestrator.Controllers
 
             try
             {
-                try { 
+                try 
+                { 
                     var customerInfo = await _customerApi.CallWebApiForUserAsync<List<Customer>>("DownstreamCustomerApi",
                         options =>
                         {
                             options.RelativePath = $"Customers";
                         });
+
                     customers = customerInfo.ToList();
                 }
                 catch(System.Exception ex)
                 {
-                    if (ex.Message == "403 Forbidden ")
+                    if (ex.HResult == -2146233088)
                     {
                         customerProductSales.CustomerAccessDenied = true;
                     }
@@ -76,7 +78,7 @@ namespace api_orchestrator.Controllers
                 }
                 catch(System.Exception ex)
                 {
-                    if (ex.Message == "403 Forbidden ")
+                    if (ex.HResult == -2146233088)
                     {
                         customerProductSales.SalesOrderHeaderDenied = true;
                     }
@@ -96,7 +98,7 @@ namespace api_orchestrator.Controllers
                 }
                 catch (System.Exception ex)
                 {
-                    if(ex.Message == "403 Forbidden ")
+                    if (ex.HResult == -2146233088)
                     {
                         customerProductSales.ProductDenied = true;
                     }

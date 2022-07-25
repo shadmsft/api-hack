@@ -13,7 +13,7 @@ namespace api_product.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "api-product.ReadOnlyRole")]
     public class ProductDescriptionsController : ControllerBase
     {
         private readonly awhackContext _context;

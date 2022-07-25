@@ -13,7 +13,7 @@ namespace api_sales.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "api-sales.ReadOnlyRole")]
     public class SalesOrderDetailsController : ControllerBase
     {
         private readonly awhackContext _context;

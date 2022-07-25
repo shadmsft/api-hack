@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api_customer.Data;
 using models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api_customer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "api-customer.ReadOnlyRole")]
     public class CustomerAddressesController : ControllerBase
     {
         private readonly awhackContext _context;
